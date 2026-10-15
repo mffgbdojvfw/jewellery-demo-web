@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A boutique jewellery website concept showcasing gold, bridal, and everyday jewellery." />
+  <title>Aurelia Jewels — Jewellery Website Demo</title>
+  <style>
+    :root {
+      --ink: #201b17;
+      --muted: #766b60;
+      --cream: #f8f4ed;
+      --paper: #fffdf9;
+      --gold: #b28a43;
+      --gold-dark: #85652d;
+      --line: #e6ddd0;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: Arial, Helvetica, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); line-height: 1.55; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; object-fit: cover; }
+    .announcement { text-align: center; padding: 9px 16px; background: var(--ink); color: #f8f1e5; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+    header { background: rgba(255,253,249,.97); border-bottom: 1px solid var(--line); }
+    .nav { max-width: 1200px; margin: auto; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-family: var(--serif); font-size: 25px; letter-spacing: .08em; line-height: 1; }
+    .brand small { display: block; font-family: var(--sans); font-size: 9px; letter-spacing: .34em; text-align: center; margin-top: 7px; }
+    .navlinks { display: flex; align-items: center; gap: 27px; font-size: 12px; letter-spacing: .09em; text-transform: uppercase; }
+    .navlinks a:hover { color: var(--gold-dark); }
+    .nav-cta, .button { display: inline-flex; justify-content: center; align-items: center; padding: 13px 20px; background: var(--ink); color: white; border: 1px solid var(--ink); font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; transition: .2s ease; }
+    .nav-cta:hover, .button:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
+    .button.light { background: transparent; color: var(--ink); border-color: #bca987; }
+    .button.light:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .hero { background: var(--cream); }
+    .hero-inner { max-width: 1200px; margin: auto; min-height: 560px; padding: 54px 28px; display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 45px; }
+    .eyebrow { margin: 0 0 17px; color: var(--gold-dark); font-size: 10px; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 400; }
+    h1 { max-width: 490px; margin: 0; font-size: clamp(42px, 5vw, 68px); line-height: 1.05; letter-spacing: -.025em; }
+    .hero-copy { max-width: 420px; margin: 21px 0 28px; color: var(--muted); font-size: 14px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-visual { min-height: 430px; height: 100%; position: relative; overflow: hidden; background: #e5d9c6; }
+    .hero-visual img { position: absolute; inset: 0; height: 100%; }
+    .hero-tag { position: absolute; left: 18px; bottom: 18px; padding: 14px 17px; background: rgba(255,253,249,.94); font-family: var(--serif); font-size: 17px; }
+    .trust { max-width: 1200px; margin: auto; padding: 25px 28px; display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; border-bottom: 1px solid var(--line); }
+    .trust div { text-align: center; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .trust span { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; font-weight: 400; letter-spacing: .02em; text-transform: none; }
+    section { scroll-margin-top: 24px; }
+    .section { max-width: 1200px; margin: auto; padding: 76px 28px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 30px; }
+    .section-head h2 { margin: 0; font-size: clamp(30px, 3.3vw, 43px); line-height: 1.1; }
+    .section-head p { max-width: 390px; margin: 0; color: var(--muted); font-size: 13px; }
+    .categories { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .category { position: relative; min-height: 325px; overflow: hidden; background: #e7dfd3; }
+    .category img { height: 325px; transition: transform .5s ease; }
+    .category:hover img { transform: scale(1.04); }
+    .category::after { content: ''; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, rgba(20,15,10,.66)); }
+    .category-label { position: absolute; z-index: 1; bottom: 22px; left: 22px; color: #fff; }
+    .category-label h3 { margin: 0 0 4px; font-size: 28px; }
+    .category-label span { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
+    .featured { background: var(--cream); }
+    .products { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+    .product-image { height: 275px; background: #eee5d9; overflow: hidden; }
+    .product-image img { height: 100%; transition: transform .4s; }
+    .product:hover .product-image img { transform: scale(1.04); }
+    .product h3 { margin: 13px 0 3px; font-size: 20px; }
+    .product p { color: var(--muted); margin: 0 0 9px; font-size: 12px; }
+    .product a { color: var(--gold-dark); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; border-bottom: 1px solid #c8b48e; padding-bottom: 4px; }
+    .story { display: grid; grid-template-columns: 1fr 1fr; gap: 54px; align-items: center; }
+    .story-image { height: 390px; overflow: hidden; background: #e7ded2; }
+    .story-image img { height: 100%; }
+    .story h2 { margin: 0 0 18px; font-size: clamp(31px, 3.4vw, 46px); line-height: 1.1; }
+    .story p { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+    .contact { background: var(--ink); color: #fffaf1; text-align: center; padding: 70px 24px; }
+    .contact .eyebrow { color: #d8b978; }
+    .contact h2 { max-width: 650px; margin: 0 auto 15px; font-size: clamp(34px, 4vw, 50px); line-height: 1.1; }
+    .contact p { max-width: 530px; margin: 0 auto 25px; color: #d4c8b9; font-size: 13px; }
+    .contact .button { background: var(--gold); border-color: var(--gold); color: #201b17; }
+    .contact .button:hover { background: #d1ad68; border-color: #d1ad68; }
+    footer { background: #171310; color: #d8cfc3; }
+    .footer-inner { max-width: 1200px; margin: auto; padding: 34px 28px; display: flex; justify-content: space-between; align-items: center; gap: 22px; }
+    .footer-brand { color: #fffaf1; font-family: var(--serif); font-size: 22px; letter-spacing: .1em; }
+    .footer-note { font-size: 11px; color: #a99c8d; }
+    .footer-links { display: flex; gap: 18px; font-size: 11px; }
+    .demo-note { position: fixed; z-index: 5; right: 12px; bottom: 12px; max-width: 255px; padding: 10px 13px; border: 1px solid #e1d3ba; background: #fffaf0; box-shadow: 0 4px 20px #00000012; color: #6b5126; font-size: 10px; line-height: 1.4; }
+    @media (max-width: 850px) {
+      .nav { padding: 18px 20px; }
+      .navlinks { gap: 14px; }
+      .navlinks a:nth-child(2) { display: none; }
+      .hero-inner { grid-template-columns: 1fr; padding: 42px 20px; gap: 30px; }
+      .hero-visual { min-height: 390px; }
+      .trust { padding: 22px 18px; }
+      .section { padding: 58px 20px; }
+      .categories { gap: 12px; }
+      .category, .category img { min-height: 260px; height: 260px; }
+      .products { grid-template-columns: repeat(2,1fr); row-gap: 25px; }
+      .product-image { height: 270px; }
+      .story { gap: 28px; }
+    }
+    @media (max-width: 560px) {
+      .announcement { font-size: 9px; }
+      .brand { font-size: 21px; }
+      .navlinks { gap: 0; }
+      .navlinks a:not(.nav-cta) { display: none; }
+      .nav-cta { padding: 11px 12px; font-size: 9px; }
+      .hero-visual { min-height: 300px; }
+      .trust { grid-template-columns: 1fr; gap: 15px; }
+      .trust div { font-size: 10px; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 12px; }
+      .categories { grid-template-columns: 1fr; }
+      .category, .category img { height: 300px; }
+      .products { gap: 13px; }
+      .product-image { height: 200px; }
+      .product h3 { font-size: 17px; }
+      .story { grid-template-columns: 1fr; }
+      .story-image { height: 300px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .demo-note { max-width: 210px; font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">Crafted with care · Made for your most meaningful moments</div>
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Aurelia Jewels home">AURELIA<small>J E W E L S</small></a>
+      <div class="navlinks">
+        <a href="#collections">Collections</a>
+        <a href="#story">Our Story</a>
+        <a href="#featured">Featured</a>
+        <a class="nav-cta" href="#contact">Book a Visit</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div>
+          <p class="eyebrow">Jewellery to treasure, always</p>
+          <h1>Made to be part of your story.</h1>
+          <p class="hero-copy">Discover thoughtfully selected gold, bridal and everyday jewellery—made for celebrations, traditions and all the little moments in between.</p>
+          <div class="hero-actions">
+            <a class="button" href="#collections">Explore collections</a>
+            <a class="button light" href="#contact">Talk to our team</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1200&q=85" alt="Elegant gold jewellery displayed in warm light" />
+          <div class="hero-tag">A little timeless. A lot personal.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust" aria-label="Store highlights">
+      <div>Thoughtful Craftsmanship<span>Details worth looking closer at</span></div>
+      <div>Personal Guidance<span>Help choosing the right piece</span></div>
+      <div>Made for Every Occasion<span>From everyday wear to weddings</span></div>
+    </div>
+
+    <section class="section" id="collections">
+      <div class="section-head">
+        <div><p class="eyebrow">Explore by style</p><h2>Find your kind of beautiful.</h2></div>
+        <p>Browse a few of our signature edits. Have a design in mind? Message us and we can help you explore options.</p>
+      </div>
+      <div class="categories">
+        <a class="category" href="#featured">
+          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=85" alt="Gold necklace collection" loading="lazy" />
+          <div class="category-label"><h3>Everyday Gold</h3><span>Simple pieces, lasting charm ↗</span></div>
+        </a>
+        <a class="category" href="#featured">
+          <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=900&q=85" alt="Statement jewellery for special occasions" loading="lazy" />
+          <div class="category-label"><h3>The Bridal Edit</h3><span>For your once-in-a-lifetime ↗</span></div>
+        </a>
+        <a class="category" href="#featured">
+          <img src="https://images.unsplash.com/photo-1611085583191-a3b181a88401?auto=format&fit=crop&w=900&q=85" alt="Delicate earrings and jewellery" loading="lazy" />
+          <div class="category-label"><h3>Little Luxuries</h3><span>Gifts with meaning ↗</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="featured" id="featured">
+      <div class="section">
+        <div class="section-head">
+          <div><p class="eyebrow">A few favourites</p><h2>Pieces worth keeping close.</h2></div>
+          <p>Product names and images below are placeholders for this demo. They can be replaced with the store's real catalogue.</p>
+        </div>
+        <div class="products">
+          <article class="product">
+            <div class="product-image"><img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=700&q=80" alt="Gold-tone earrings" loading="lazy" /></div>
+            <h3>Golden Hour Hoops</h3><p>Everyday collection</p><a href="#contact">Enquire about this piece</a>
+          </article>
+          <article class="product">
+            <div class="product-image"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=700&q=80" alt="Elegant necklace" loading="lazy" /></div>
+            <h3>Heirloom Necklace</h3><p>Signature collection</p><a href="#contact">Enquire about this piece</a>
+          </article>
+          <article class="product">
+            <div class="product-image"><img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=700&q=80" alt="Statement jewellery piece" loading="lazy" /></div>
+            <h3>The Celebration Set</h3><p>Occasion collection</p><a href="#contact">Enquire about this piece</a>
+          </article>
+          <article class="product">
+            <div class="product-image"><img src="https://images.unsplash.com/photo-1611085583191-a3b181a88401?auto=format&fit=crop&w=700&q=80" alt="Delicate jewellery gift" loading="lazy" /></div>
+            <h3>Little Keepsake</h3><p>Gifting collection</p><a href="#contact">Enquire about this piece</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="story">
+      <div class="story">
+        <div class="story-image"><img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1100&q=85" alt="Close-up of carefully styled jewellery" loading="lazy" /></div>
+        <div>
+          <p class="eyebrow">A personal touch</p>
+          <h2>Jewellery should feel like you.</h2>
+          <p>Choosing a special piece should feel personal, not overwhelming. Visit us to explore designs, ask questions and find something that feels right for you.</p>
+          <p>Whether you're shopping for a celebration, a gift or something just because, our team is here to help you make a confident choice.</p>
+          <a class="button light" href="#contact">Plan your visit</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <p class="eyebrow">Let's find your piece</p>
+      <h2>Your next favourite piece might be one message away.</h2>
+      <p>Ask about a design, check availability or book a visit. We would love to help you find something special.</p>
+      <!-- Replace the demo WhatsApp number below with the business's real number before publishing. -->
+      <a class="button" href="https://wa.me/919999999999?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20your%20jewellery%20collection." target="_blank" rel="noopener">Message us on WhatsApp</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div><div class="footer-brand">AURELIA JEWELS</div><div class="footer-note">A boutique jewellery website concept</div></div>
+      <div class="footer-links"><a href="#collections">Collections</a><a href="#story">Our Story</a><a href="#contact">Contact</a></div>
+      <div class="footer-note">© <span id="year">2026</span> Aurelia Jewels. Demo concept.</div>
+    </div>
+  </footer>
+  <div class="demo-note">DEMO CONCEPT — replace the name, products, photos, store address and WhatsApp number with the business's real details.</div>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
